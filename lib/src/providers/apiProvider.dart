@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:rmys/src/models/dependencia_model.dart';
 import 'package:rmys/src/models/evento_model.dart';
+import 'package:rmys/src/models/personal_model.dart';
 import 'package:rmys/src/models/sala_model.dart';
 
 class ApiProvider {
@@ -28,19 +29,32 @@ class ApiProvider {
       List<EventoModel> eventos = (respuesta['eventos'] as List)
           .map((evento) => EventoModel.fromJson(evento))
           .toList();
-          return eventos;
+      return eventos;
     }
     return [];
   }
 
-
-  Future<List<SalaModel>> listaSalas()async{
+  Future<List<SalaModel>> listaSalas() async {
     var peticion = await http.get("$API_URL/api/salas");
-    if(peticion.statusCode == 201 || peticion.statusCode ==200){
+    if (peticion.statusCode == 201 || peticion.statusCode == 200) {
       final respuesta = json.decode(peticion.body);
-      List<SalaModel> salas = (respuesta['salas'] as List).map((sala) => SalaModel.fromJson(sala)).toList();
+      List<SalaModel> salas = (respuesta['salas'] as List)
+          .map((sala) => SalaModel.fromJson(sala))
+          .toList();
       return salas;
     }
     return [];
+  }
+
+  Future<PersonalModel> login(String correo, String pass) async {
+    var request = await http.post("$API_URL/api/login", body: {
+      'Correo': correo,
+      'Contrasena': pass,
+    });
+    if (request.statusCode == 200 || request.statusCode == 201) {
+      final res = request.body;
+      return PersonalModel.fromJson(json.decode(res));
+    }
+    return null;
   }
 }

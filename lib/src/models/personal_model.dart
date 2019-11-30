@@ -14,6 +14,7 @@ class PersonalModel {
     String correo;
     String contrasena;
     String idDepartamento;
+    dynamic idRol;
 
     PersonalModel({
         this.rfc,
@@ -21,6 +22,7 @@ class PersonalModel {
         this.correo,
         this.contrasena,
         this.idDepartamento,
+        this.idRol,
     });
 
     factory PersonalModel.fromJson(Map<String, dynamic> json) => PersonalModel(
@@ -29,6 +31,7 @@ class PersonalModel {
         correo: json["Correo"],
         contrasena: json["Contrasena"],
         idDepartamento: json["idDepartamento"],
+        idRol: json["id_rol"],
     );
 
     Map<String, dynamic> toJson() => {
@@ -37,5 +40,6 @@ class PersonalModel {
         "Correo": correo,
         "Contrasena": contrasena,
         "idDepartamento": idDepartamento,
+        "id_rol": idRol,
     };
 }

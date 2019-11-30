@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:rmys/src/pages/detalles_salas_pages.dart';
 import 'package:rmys/src/pages/evento_pages.dart';
 import 'package:rmys/src/pages/home.dart';
+import 'package:rmys/src/pages/login_pages.dart';
 import 'package:rmys/src/pages/personal_pages.dart';
 import 'package:rmys/src/pages/salas_pages.dart';
 
@@ -24,10 +25,11 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Recursos Materiales',
-      initialRoute: 'home',
+      initialRoute: 'login',
       routes: {
         'home': (BuildContext context) =>HomePage(),
         'detalleSala' : (BuildContext context) => DetalleSalaPages(),
+        'login' : (BuildContext context) => LoginPage(),
       }, 
     );
   }

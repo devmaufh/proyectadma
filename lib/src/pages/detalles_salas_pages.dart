@@ -12,7 +12,9 @@ class DetalleSalaPages extends StatelessWidget {
       appBar: AppBar(
         centerTitle: true,
         elevation: 0.0,
-        iconTheme: IconThemeData(color: Colors.black),
+        iconTheme: IconThemeData(
+          color: Colors.black
+        ),
         backgroundColor: Colors.white,
         title: Text(
           modelo.nom,
@@ -30,6 +32,7 @@ class DetalleSalaPages extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
+      
                 Hero(
                   tag: modelo.idSala,
                   child: Image(image: AssetImage('assets/evento.jpg')),
@@ -57,7 +60,7 @@ class DetalleSalaPages extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.playlist_add),
-        onPressed: () {},
+        onPressed: (){},
       ),
     );
   }
