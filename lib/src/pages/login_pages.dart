@@ -15,12 +15,20 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //backgroundColor: Color.fromRGBO(0, 65, 172, 1.0),
       body: SafeArea(
         child: Center(
           child: Form(
             key: formKey,
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
+                Text(
+                  'Inicio de Sesión',
+                  style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.w600),
+                ),
+                SizedBox(height: 20.0),
                 _construyeTextEmail(),
                 SizedBox(height: 20.0),
                 _construyeTextPass(),
@@ -43,8 +51,8 @@ class _LoginPageState extends State<LoginPage> {
 
   _login() async {
     if (!formKey.currentState.validate()) return;
-        formKey.currentState.save();
-        Navigator.pushNamed(context, 'home');
+    formKey.currentState.save();
+    Navigator.pushNamed(context, 'home');
   }
 
   Widget _construyeTextEmail() {

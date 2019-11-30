@@ -73,12 +73,6 @@ class _SalasPageState extends State<SalasPage> {
           tag: model.idSala,
           child: Container(
             decoration: BoxDecoration(
-                /*boxShadow: [
-                 /* BoxShadow(
-                    color: Colors.grey,
-                    blurRadius: 5.0,
-                  ),*/
-                ],*/
                 borderRadius: BorderRadius.circular(20),
                 //Permite manipular la imagen
                 image: DecorationImage(
