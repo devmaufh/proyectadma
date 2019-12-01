@@ -15,43 +15,61 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Color.fromRGBO(0, 65, 172, 1.0),
-      body: SafeArea(
-        child: Center(
-          child: Form(
-            key: formKey,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                Text(
-                  'Inicio de Sesión',
-                  style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.w600),
+      backgroundColor: Color.fromRGBO(0, 65, 172, 1.0),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            child: Container(
+              margin: EdgeInsets.fromLTRB(20.0, 20.0, 20.0, 20.0),
+              width: double.infinity,
+              padding: EdgeInsets.all(20.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(20.0),
+              ),
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Text(
+                      'Recursos Materiales & Servicio',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                        fontSize: 40.0,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
+                      ),
+                    ),
+                    SizedBox(
+                      height: 40.0,
+                    ),
+                    _construyeTextEmail(),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    _construyeTextPass(),
+                    SizedBox(
+                      height: 20.0,
+                    ),
+                    _boton(),
+                    SizedBox(height: 20.0,)
+                  ],
                 ),
-                SizedBox(height: 20.0),
-                _construyeTextEmail(),
-                SizedBox(height: 20.0),
-                _construyeTextPass(),
-                SizedBox(
-                  height: 20.0,
-                ),
-                RaisedButton(
-                  child: Text('Entrar'),
-                  onPressed: () {
-                    _login();
-                  },
-                ),
-              ],
+              ),
             ),
           ),
-        ),
+        ],
       ),
     );
   }
 
+  //Me manda error en esto, autsilio
   _login() async {
-    if (!formKey.currentState.validate()) return;
-    formKey.currentState.save();
+    /*if (!formKey.currentState.validate()) return;
+    formKey.currentState.save();*/
     Navigator.pushNamed(context, 'home');
   }
 
@@ -59,7 +77,7 @@ class _LoginPageState extends State<LoginPage> {
     return TextFormField(
       keyboardType: TextInputType.emailAddress,
       decoration: InputDecoration(
-        hintText: "Ej. Mau@example.com",
+        hintText: "Ejemplo@example.com",
         labelText: "Email",
         border: OutlineInputBorder(borderSide: BorderSide()),
         prefixIcon: Icon(Icons.email),
@@ -82,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
       decoration: InputDecoration(
         labelText: "Password",
         border: OutlineInputBorder(borderSide: BorderSide()),
-        prefixIcon: Icon(Icons.security),
+        prefixIcon: Icon(Icons.vpn_key),
       ),
       onSaved: (contra) {
         pass = contra;
@@ -93,4 +111,16 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
   }
+
+  Widget _boton() {
+    return FloatingActionButton.extended(
+      onPressed: () {
+        _login();
+      },
+      label: Text('Entrar'),
+      icon: Icon(Icons.check),
+      backgroundColor: Colors.black,
+    );
+  }
+
 }

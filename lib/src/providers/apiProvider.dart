@@ -6,6 +6,7 @@ import 'package:rmys/src/models/dependencia_model.dart';
 import 'package:rmys/src/models/evento_model.dart';
 import 'package:rmys/src/models/personal_model.dart';
 import 'package:rmys/src/models/sala_model.dart';
+import 'package:rmys/src/models/solicitud_model.dart';
 
 class ApiProvider {
   final String API_URL = "http://yabasta.azurewebsites.net/cachito/index.php";
@@ -56,5 +57,16 @@ class ApiProvider {
       return PersonalModel.fromJson(json.decode(res));
     }
     return null;
+  }
+
+  Future<List<SolicitudModel>> listaSolicitudes() async {
+    var peticion = await http.get("$API_URL/api/solicityud");
+    if (peticion.statusCode == 201 || peticion.statusCode == 200) {
+      final respuesta = json.decode(peticion.body);
+      List<SolicitudModel> solicitudes = (respuesta['solicitud'] as List)
+          .map((solicitud) => SolicitudModel.fromJson(solicitud))
+          .toList();
+      return [];
+    }
   }
 }

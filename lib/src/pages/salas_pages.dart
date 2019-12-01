@@ -65,18 +65,13 @@ class _SalasPageState extends State<SalasPage> {
 
   Widget _itemPage(SalaModel model) {
     return Stack(
-      //alignment: Alignment.center,
       children: <Widget>[
-        //Animación
         Hero(
-          //ID asigna a la Animación
           tag: model.idSala,
           child: Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                //Permite manipular la imagen
                 image: DecorationImage(
-                  // Filtro de color
                   colorFilter: ColorFilter.mode(
                     Color.fromRGBO(0, 0, 0, .5),
                     BlendMode.darken,
@@ -85,7 +80,6 @@ class _SalasPageState extends State<SalasPage> {
                   image: AssetImage('assets/evento.jpg'),
                 )),
             margin: EdgeInsets.fromLTRB(10, 10, 10, 30),
-            //Stack permite sobre poner
             child: Stack(
               children: <Widget>[
                 Positioned(
@@ -121,16 +115,17 @@ class _SalasPageState extends State<SalasPage> {
           ),
         ),
         Positioned(
-          right: 15.0,
-          bottom: 4.0,
-          child: FloatingActionButton(
-            backgroundColor: Color.fromRGBO(0, 0, 0, 0.5),
-            child: Icon(Icons.remove_red_eye),
-            onPressed: () {
-              Navigator.pushNamed(context, 'detalleSala', arguments: model);
-            },
-          ),
-        ),
+            right: 15.0,
+            bottom: 4.0,
+            child: RaisedButton(
+                color: Color.fromRGBO(0, 0, 0, 0.5),
+                child: Icon(
+                  Icons.remove_red_eye,
+                  color: Colors.white,
+                ),
+                onPressed: () {
+                  Navigator.pushNamed(context, 'detalleSala', arguments: model);
+                })),
       ],
     );
   }

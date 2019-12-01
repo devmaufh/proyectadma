@@ -1,11 +1,10 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:rmys/src/pages/detalles_salas_pages.dart';
 import 'package:rmys/src/pages/evento_pages.dart';
 import 'package:rmys/src/pages/home.dart';
 import 'package:rmys/src/pages/login_pages.dart';
-import 'package:rmys/src/pages/personal_pages.dart';
 import 'package:rmys/src/pages/salas_pages.dart';
+import 'package:rmys/src/pages/solicitud_pages.dart';
 
 void main() => runApp(MyApp());
 
@@ -27,10 +26,13 @@ class _MyAppState extends State<MyApp> {
       title: 'Recursos Materiales',
       initialRoute: 'login',
       routes: {
-        'home': (BuildContext context) =>HomePage(),
-        'detalleSala' : (BuildContext context) => DetalleSalaPages(),
-        'login' : (BuildContext context) => LoginPage(),
-      }, 
+        'login': (BuildContext context) => LoginPage(),
+        'home': (BuildContext context) => HomePage(),
+        'evento': (BuildContext context) => EventosPage(),
+        'sala': (BuildContext context) => SalasPage(),
+        'detalleSala': (BuildContext context) => DetalleSalaPages(),
+        'solicitud': (BuildContext context) => SolicitudPage(),
+      },
     );
   }
 }

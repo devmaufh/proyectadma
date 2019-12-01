@@ -8,13 +8,10 @@ class DetalleSalaPages extends StatelessWidget {
   Widget build(BuildContext context) {
     SalaModel modelo = ModalRoute.of(context).settings.arguments;
     return Scaffold(
-      backgroundColor: Colors.white,
       appBar: AppBar(
         centerTitle: true,
         elevation: 0.0,
-        iconTheme: IconThemeData(
-          color: Colors.black
-        ),
+        iconTheme: IconThemeData(color: Colors.black),
         backgroundColor: Colors.white,
         title: Text(
           modelo.nom,
@@ -25,42 +22,86 @@ class DetalleSalaPages extends StatelessWidget {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Stack(
-          children: <Widget>[
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-      
-                Hero(
+      body: Column(
+        children: <Widget>[
+          Stack(
+            children: <Widget>[
+              SizedBox(
+                height: 20.0,
+              ),
+              Container(
+                height: 300.0,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      offset: Offset(0.0, 1.0),
+                      blurRadius: 6.0,
+                    ),
+                  ],
+                ),
+                child: Hero(
                   tag: modelo.idSala,
-                  child: Image(image: AssetImage('assets/evento.jpg')),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20.0),
+                    child: Image(
+                      image: AssetImage('assets/evento.jpg'),
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
-                ListTile(
-                  leading: Icon(Icons.location_city),
-                  title: Text('Ubicación : '),
-                  subtitle: Text(modelo.edificio[0].nom),
-                ),
-                ListTile(
-                  leading: Icon(Icons.accessibility),
-                  title: Text('Capacidad : '),
-                  subtitle: Text(modelo.capacidad),
-                ),
-                ListTile(
-                  leading: Icon(Icons.description),
-                  title: Text('Descripción : '),
-                  subtitle: Text(
-                      'Pues aqui va la mamada de descripcion de el edifició.'),
-                ),
-              ],
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.playlist_add),
-        onPressed: (){},
+              ),
+            ],
+          ),
+          Column(
+            children: <Widget>[
+              SizedBox(
+                height: 10.0,
+              ),
+              ListTile(
+                leading: Icon(Icons.location_city),
+                title: Text('Ubicación : '),
+                subtitle: Text(modelo.edificio[0].nom),
+              ),
+              SizedBox(
+                height: 5.0,
+              ),
+              ListTile(
+                leading: Icon(Icons.accessibility),
+                title: Text('Capacidad : '),
+                subtitle: Text(modelo.capacidad),
+              ),
+              SizedBox(
+                height: 5.0,
+              ),
+              ListTile(
+                leading: Icon(Icons.description),
+                title: Text('Descripción : '),
+                subtitle: Text(
+                    'Pues aqui va la mamada de descripcion de el edifició.'),
+              ),
+              SizedBox(
+                height: 5.0,
+              ),
+              FloatingActionButton.extended(
+                onPressed: () {
+                  Navigator.pushNamed(context, 'solicitud');
+                },
+                label: Text('Solicitar'),
+                icon: Icon(Icons.add),
+                backgroundColor: Colors.black,
+              ),
+              /*FloatingActionButton(
+                child: Icon(Icons.add),
+                backgroundColor: Colors.black,
+                onPressed: () {
+                  Navigator.pushNamed(context, 'solicitud');
+                },
+              ),*/
+            ],
+          ),
+        ],
       ),
     );
   }
