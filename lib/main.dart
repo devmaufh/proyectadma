@@ -14,9 +14,11 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  
   int indice = 0;
   @override
   void initState() {
+    print("Aver");
     super.initState();
   }
 
