@@ -54,7 +54,13 @@ class ApiProvider {
     });
     if (request.statusCode == 200 || request.statusCode == 201) {
       final res = request.body;
-      return PersonalModel.fromJson(json.decode(res));
+      try{
+        final r = PersonalModel.fromJson(json.decode(res));
+        return r;
+      }catch(_){
+        return null;
+      }
+      //return PersonalModel.fromJson(json.decode(res));
     }
     return null;
   }

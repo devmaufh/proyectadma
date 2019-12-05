@@ -1,3 +1,6 @@
+// To parse this JSON data, do
+//
+//     final salaModel = salaModelFromJson(jsonString);
 
 import 'dart:convert';
 
@@ -11,12 +14,16 @@ class SalaModel {
     String idSala;
     String nom;
     String capacidad;
+    String descripcion;
+    String url;
     List<Edificio> edificio;
 
     SalaModel({
         this.idSala,
         this.nom,
         this.capacidad,
+        this.descripcion,
+        this.url,
         this.edificio,
     });
 
@@ -24,6 +31,8 @@ class SalaModel {
         idSala: json["idSala"],
         nom: json["Nom"],
         capacidad: json["Capacidad"],
+        descripcion: json["descripcion"],
+        url: json["url"],
         edificio: List<Edificio>.from(json["edificio"].map((x) => Edificio.fromJson(x))),
     );
 
@@ -31,8 +40,8 @@ class SalaModel {
         "idSala": idSala,
         "Nom": nom,
         "Capacidad": capacidad,
+        "descripcion": descripcion,
+        "url": url,
         "edificio": List<dynamic>.from(edificio.map((x) => x.toJson())),
     };
 }
-
-

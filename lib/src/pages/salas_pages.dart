@@ -77,7 +77,7 @@ class _SalasPageState extends State<SalasPage> {
                     BlendMode.darken,
                   ),
                   fit: BoxFit.cover,
-                  image: AssetImage('assets/evento.jpg'),
+                  image: NetworkImage('http://yabasta.azurewebsites.net/cachito/files/${model.url}'),
                 )),
             margin: EdgeInsets.fromLTRB(10, 10, 10, 30),
             child: Stack(

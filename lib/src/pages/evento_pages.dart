@@ -46,7 +46,7 @@ class _EventosPageState extends State<EventosPage> {
                         children: <Widget>[
                           Container(
                             margin: EdgeInsets.fromLTRB(40.0, 5.0, 20.0, 5.0),
-                            height: 170.0,
+                            height: 200.0,
                             width: double.infinity,
                             decoration: BoxDecoration(
                               color: Colors.white,

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:rmys/src/models/personal_model.dart';
+import 'package:rmys/src/providers/apiProvider.dart';
 import 'package:rmys/src/utils/validacion.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({Key key}) : super(key: key);
@@ -12,6 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   final formKey = GlobalKey<FormState>();
   String corr = "";
   String pass = "";
+  String _message = "";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,33 +34,42 @@ class _LoginPageState extends State<LoginPage> {
                 borderRadius: BorderRadius.circular(20.0),
               ),
               child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      'Recursos Materiales & Servicio',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                        fontSize: 40.0,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black,
+                child: Form(
+                  key: formKey,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        'Recursos Materiales & Servicio',
+                        textAlign: TextAlign.left,
+                        style: TextStyle(
+                          fontSize: 40.0,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black,
+                        ),
                       ),
-                    ),
-                    SizedBox(
-                      height: 40.0,
-                    ),
-                    _construyeTextEmail(),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    _construyeTextPass(),
-                    SizedBox(
-                      height: 20.0,
-                    ),
-                    _boton(),
-                    SizedBox(height: 20.0,)
-                  ],
+                      SizedBox(
+                        height: 40.0,
+                      ),
+                      _construyeTextEmail(),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      _construyeTextPass(),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      _boton(),
+                      SizedBox(
+                        height: 20.0,
+                      ),
+                      Text(
+                        _message,
+                        style: TextStyle(color: Colors.red),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -68,9 +81,27 @@ class _LoginPageState extends State<LoginPage> {
 
   //Me manda error en esto, autsilio
   _login() async {
-    /*if (!formKey.currentState.validate()) return;
-    formKey.currentState.save();*/
-    Navigator.pushNamed(context, 'home');
+    if (!formKey.currentState.validate()) return;
+    formKey.currentState.save();
+    print(corr);
+    print(pass);
+    final resLogin = await ApiProvider().login(corr, pass);
+    if (resLogin == null) {
+      setState(() {
+        _message = "Correo y/o contraseña incorrectos";
+      });
+    } else {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+        await prefs.setString('rfc', resLogin.rfc);
+        await prefs.setString('nom', resLogin.nom);
+        await prefs.setString('correo', resLogin.correo);
+        await prefs.setString('idDepartamento', resLogin.idDepartamento);
+
+      print("cool");
+      Navigator.pushNamed(context, 'home');
+      _message = "";
+    }
+    //
   }
 
   Widget _construyeTextEmail() {
@@ -122,5 +153,4 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: Colors.black,
     );
   }
-
 }

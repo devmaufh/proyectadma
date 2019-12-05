@@ -46,7 +46,7 @@ class DetalleSalaPages extends StatelessWidget {
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(20.0),
                     child: Image(
-                      image: AssetImage('assets/evento.jpg'),
+                      image: NetworkImage('http://yabasta.azurewebsites.net/cachito/files/${modelo.url}'),
                       fit: BoxFit.cover,
                     ),
                   ),
