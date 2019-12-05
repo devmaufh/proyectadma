@@ -47,6 +47,7 @@ class _HomePageState extends State<HomePage> {
         return SalasPage();
       case 2:
         return PeronalPage();
+
       default:
         return EventosPage();
     }

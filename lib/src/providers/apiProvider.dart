@@ -65,14 +65,21 @@ class ApiProvider {
     return null;
   }
 
-  Future<List<SolicitudModel>> listaSolicitudes() async {
-    var peticion = await http.get("$API_URL/api/solicityud");
+  Future<List<SolicitudModel>> listaSolicitudes(String rfc) async {
+    var peticion = await http.get("$API_URL/api/solicitudes/$rfc");
     if (peticion.statusCode == 201 || peticion.statusCode == 200) {
       final respuesta = json.decode(peticion.body);
-      List<SolicitudModel> solicitudes = (respuesta['solicitud'] as List)
-          .map((solicitud) => SolicitudModel.fromJson(solicitud))
+      List<SolicitudModel> solicitudes = (respuesta['solicitudes'] as List)
+          .map((solicitud){
+            solicitud['sala']['edificio'] = [{
+              'idEdificio': "1",
+              'Nom': "Null",
+            }];
+            print(solicitud);
+             return SolicitudModel.fromJson(solicitud);
+          })
           .toList();
-      return [];
+      return solicitudes;
     }
   }
 }

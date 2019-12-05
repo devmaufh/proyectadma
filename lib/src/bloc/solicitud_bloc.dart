@@ -10,9 +10,9 @@ class SolicitudBloc{
     Stream<List<SolicitudModel>> get solicitudStream => _solicitudController.stream;
 
 
-  void getSolicitud()async{
+  void getSolicitud(String rfc)async{
     print("Obteniendo solicituid");
-    var listaSolicitud  = await provider.listaSolicitudes();
+    var listaSolicitud  = await provider.listaSolicitudes(rfc);
     _solicitudController.sink.add(listaSolicitud);
   }
 }
